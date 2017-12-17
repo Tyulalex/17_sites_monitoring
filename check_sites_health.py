@@ -17,9 +17,9 @@ def load_urls4check(path):
         return url_file.read().splitlines()
 
 
-def is_server_respond_with_200(url):
+def is_server_response_ok(url):
     response = requests.get(url, verify=False)
-    if response.status_code == 200:
+    if response.ok:
         return True
     return False
 
@@ -27,7 +27,8 @@ def is_server_respond_with_200(url):
 def is_domain_expired_in_more_than_1_month(domain_name):
     expiration_date = get_domain_expiration_date(domain_name)
     now = datetime.now()
-    return (expiration_date - now).days > 30
+    delta = expiration_date - now
+    return delta.days > 30
 
 
 def get_domain_expiration_date(domain_name):
@@ -39,7 +40,7 @@ def get_domain_expiration_date(domain_name):
 
 def collect_errors(url):
     errors = []
-    if not is_server_respond_with_200(url):
+    if not is_server_response_ok(url):
         errors.append(
             'ERROR: HEALTHCHECK STATUS is not 200'.format(url))
     if not is_domain_expired_in_more_than_1_month(url):
