@@ -25,7 +25,6 @@ on linux might require
 --path shall be in the format of your system
 
 Supported Systems: Windows, Unix
-[TODO. There will be project description]
 
 # Project Goals
 

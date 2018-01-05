@@ -19,9 +19,7 @@ def load_urls4check(path):
 
 def is_server_response_ok(url):
     response = requests.get(url, verify=False)
-    if response.ok:
-        return True
-    return False
+    return response.ok
 
 
 def is_domain_expired_in_more_than_1_month(domain_name):
